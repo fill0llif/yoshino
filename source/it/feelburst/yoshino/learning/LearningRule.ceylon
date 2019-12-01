@@ -1,3 +1,5 @@
-shared interface LearningRule {
-	shared formal void initWeights();
+import it.feelburst.yoshino.learning.model {
+	WeightInitialization
 }
+shared interface LearningRule
+satisfies WeightInitialization {}

@@ -11,18 +11,20 @@ shared class Synapse satisfies Visitable {
 	shared Neuron right;
 	shared variable Float weight;
 	
-	abstract new conn(Neuron left, Neuron right) {
+	shared new withWeight(
+		Neuron left, 
+		Neuron right, 
+		Float weight() => DefaultRandom().nextFloat()) {
 		this.left = left;
 		this.right = right;
+		this.weight = weight();
 	}
 	
-	shared new (Neuron lhs, Neuron rhs, Float weightInit() => DefaultRandom().nextFloat()) extends conn(lhs, rhs) {
-		this.weight = weightInit();
-	}
-	
-	shared new withWeight(Neuron lhs, Neuron rhs, Float weight = 0.0) extends conn(lhs, rhs) {
-		this.weight = weight;
-	}
+	shared new (
+		Neuron left,
+		Neuron right,
+		Float weight = 0.0)
+		extends withWeight(left, right,() => weight) {}
 	
 	shared actual Boolean equals(Object that) {
 		if (is Synapse that) {
@@ -40,5 +42,7 @@ shared class Synapse satisfies Visitable {
 		return hash;
 	}
 	
-	shared actual String string => "(left=``left``,right=``right``,weight=``weight``)";
+	shared actual String string =>
+		"(left=``left``,right=``right``,weight=``weight``)";
+	
 }

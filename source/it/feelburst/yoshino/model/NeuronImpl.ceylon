@@ -1,5 +1,5 @@
-shared class NeuronImpl(label, activationFunction, input = 0.0) extends Neuron(label) {
-	shared actual String label;
-	shared actual variable ActivationFunction activationFunction;
-	shared actual variable Float input;
-}
+shared class NeuronImpl(
+	shared actual String label,
+	shared actual variable Function activationFunction,
+	shared actual variable Float input = 0.0)
+	extends Neuron(label) {}
